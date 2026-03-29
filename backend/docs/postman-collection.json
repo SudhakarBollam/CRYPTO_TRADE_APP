@@ -1,0 +1,90 @@
+{
+  "info": {
+    "name": "Crypto Portfolio API v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api/v1" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth — Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"trader@example.com\",\n  \"password\": \"Password1\",\n  \"name\": \"Trader\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth — Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"trader@example.com\",\n  \"password\": \"Password1\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth — Me",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/auth/me"
+      }
+    },
+    {
+      "name": "Trades — Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/trades",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"asset\": \"BTC\",\n  \"type\": \"BUY\",\n  \"price\": 68000,\n  \"quantity\": 0.01,\n  \"note\": \"DCA\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Trades — List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/trades?page=1&limit=10&asset=BTC&type=BUY"
+      }
+    },
+    {
+      "name": "Portfolio",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/portfolio"
+      }
+    },
+    {
+      "name": "Analytics — Summary",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/analytics/summary"
+      }
+    },
+    {
+      "name": "Market — Prices",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/market/prices?ids=bitcoin,ethereum"
+      }
+    }
+  ]
+}
